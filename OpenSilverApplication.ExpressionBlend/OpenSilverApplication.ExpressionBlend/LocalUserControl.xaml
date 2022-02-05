@@ -1,0 +1,83 @@
+﻿<UserControl
+    x:Class="OpenSilverApplication.ExpressionBlend.LocalUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:OpenSilverApplication.ExpressionBlend"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Name="userControl">
+
+    <Grid>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <ei:GoToStateAction StateName="YellowState"/>
+                </i:EventTrigger>
+                <ei:PropertyChangedTrigger Binding="{Binding ElementName=boundLabel, Path=Text}">
+                    <i:Interaction.Behaviors>
+                        <ei:ConditionBehavior>
+                            <ei:ConditionalExpression>
+                                <!--<ei:ComparisonCondition LeftOperand="{Binding DataContext, ElementName=userControl}" RightOperand="No background"/>-->
+                                <ei:ComparisonCondition LeftOperand="{Binding ElementName=boundLabel, Path=Text}" RightOperand="No background"/>
+                            </ei:ConditionalExpression>
+                        </ei:ConditionBehavior>
+                    </i:Interaction.Behaviors>
+                    <ei:GoToStateAction StateName="YellowState"/>
+                </ei:PropertyChangedTrigger>
+                <ei:PropertyChangedTrigger Binding="{Binding ElementName=boundLabel, Path=Text}">
+                    <i:Interaction.Behaviors>
+                        <ei:ConditionBehavior>
+                            <ei:ConditionalExpression>
+                                <!--<ei:ComparisonCondition LeftOperand="{Binding DataContext, ElementName=userControl}" RightOperand="Orange background"/>-->
+                                <ei:ComparisonCondition LeftOperand="{Binding ElementName=boundLabel, Path=Text}" RightOperand="Orange background"/>
+                            </ei:ConditionalExpression>
+                        </ei:ConditionBehavior>
+                    </i:Interaction.Behaviors>
+                    <ei:GoToStateAction StateName="OrangeState"/>
+                </ei:PropertyChangedTrigger>
+                <!--<ei:PropertyChangedTrigger Binding="{Binding DataContext, ElementName=userControl}">-->
+                <ei:PropertyChangedTrigger Binding="{Binding ElementName=boundLabel, Path=Text}">
+                    <i:Interaction.Behaviors>
+                        <ei:ConditionBehavior>
+                            <ei:ConditionalExpression>
+                                <!--<ei:ComparisonCondition LeftOperand="{Binding DataContext, ElementName=userControl}" RightOperand="Green background"/>-->
+                                <ei:ComparisonCondition LeftOperand="{Binding ElementName=boundLabel, Path=Text}" RightOperand="Green background"/>
+                            </ei:ConditionalExpression>
+                        </ei:ConditionBehavior>
+                    </i:Interaction.Behaviors>
+                    <ei:GoToStateAction StateName="GreenState"/>
+                </ei:PropertyChangedTrigger>
+            </i:Interaction.Triggers>
+            <Grid Height="24" Width="180">
+                <TextBlock HorizontalAlignment="Center" x:Name="boundLabel" Background="Blue" Text="{Binding DataContext, ElementName=userControl}" Margin="10" />
+            </Grid>
+        </Button>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="LoadingStates">
+                <VisualState x:Name="YellowState">
+                    <Storyboard>
+                        <ColorAnimation Duration="0"
+									    To="Yellow"
+									    Storyboard.TargetProperty="Background"
+									    Storyboard.TargetName="boundLabel" />
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="GreenState">
+                    <Storyboard>
+                        <ColorAnimation Duration="0"
+									    To="Green"
+									    Storyboard.TargetProperty="Background"
+									    Storyboard.TargetName="boundLabel" />
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="OrangeState">
+                    <Storyboard>
+                        <ColorAnimation Duration="0"
+									    To="Orange"
+									    Storyboard.TargetProperty="Background"
+									    Storyboard.TargetName="boundLabel" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</UserControl>
